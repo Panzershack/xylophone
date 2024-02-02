@@ -15,13 +15,27 @@ class XylophoneApp extends StatelessWidget {
   }
 
   final ButtonStyle flatButtonStyle = TextButton.styleFrom(
-    primary: Colors.black87,
+    foregroundColor: Colors.black87,
     minimumSize: Size(88, 36),
-    padding: EdgeInsets.symmetric(horizontal: 16),
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(2)),
     ),
   );
+
+  Expanded buildKey(int num, Color col) {
+    return Expanded(
+      child: TextButton(
+        style: flatButtonStyle.copyWith(
+            backgroundColor: MaterialStatePropertyAll(
+                col) //instead of directly using col we used this
+            ),
+        onPressed: () {
+          playSound('note$num.wav');
+        },
+        child: SizedBox(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,105 +46,13 @@ class XylophoneApp extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(0.0),
-                  child: TextButton(
-                    style: flatButtonStyle,
-                    onPressed: () {
-                      playSound('note1.wav');
-                    },
-                    child: Container(
-                      margin: EdgeInsets.zero,
-                      color: Colors.red,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(0.0),
-                  child: TextButton(
-                    style: flatButtonStyle,
-                    onPressed: () {
-                      playSound('note2.wav');
-                    },
-                    child: Container(
-                      color: Colors.orange,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(0.0),
-                  child: TextButton(
-                    style: flatButtonStyle,
-                    onPressed: () {
-                      playSound('note3.wav');
-                    },
-                    child: Container(
-                      color: Colors.yellow,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(0.0),
-                  child: TextButton(
-                    style: flatButtonStyle,
-                    onPressed: () {
-                      playSound('note4.wav');
-                    },
-                    child: Container(
-                      color: Colors.green,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(0.0),
-                  child: TextButton(
-                    style: flatButtonStyle,
-                    onPressed: () {
-                      playSound('note5.wav');
-                    },
-                    child: Container(
-                      color: Colors.blue,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(0.0),
-                  child: TextButton(
-                    style: flatButtonStyle,
-                    onPressed: () {
-                      playSound('note6.wav');
-                    },
-                    child: Container(
-                      color: Colors.indigo,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(0.0),
-                  child: TextButton(
-                    style: flatButtonStyle,
-                    onPressed: () {
-                      playSound('note7.wav');
-                    },
-                    child: Container(
-                      color: Colors.purple,
-                    ),
-                  ),
-                ),
-              ),
+              buildKey(1, Colors.red),
+              buildKey(2, Colors.orange),
+              buildKey(3, Colors.yellow),
+              buildKey(4, Colors.green),
+              buildKey(5, Colors.blue),
+              buildKey(6, Colors.indigo),
+              buildKey(7, Colors.purple),
             ],
           ),
         ),
